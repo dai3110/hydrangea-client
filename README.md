@@ -1,75 +1,11 @@
-# Nuxt Minimal Starter
+# hydrangea-client
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+自然風景写真集 Hydrangea  
+https://o32icjssx7.execute-api.ap-northeast-1.amazonaws.com/
 
-## Setup
-
-Make sure to install dependencies:
-
-```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+このサイトを作成するためのレポジトリです。  
+AWS Lambda ＋ API Gateway で Nuxt3 を動かして、  
+別レポジトリのバックエンド ＋ 管理サイト
+https://j5zrnslyef.execute-api.ap-northeast-1.amazonaws.com/api/articles
+https://j5zrnslyef.execute-api.ap-northeast-1.amazonaws.com/admin/
+でのAPIを取り込んで表示しています。
