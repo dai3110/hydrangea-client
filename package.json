@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-app",
+  "name": "hydrangea-client",
   "private": true,
   "scripts": {
     "build": "nuxt build && node local_task/lambda && node local_task/clean && cd ./.output && zip -r ../dist/product.zip *",
