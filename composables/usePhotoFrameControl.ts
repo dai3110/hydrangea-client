@@ -10,6 +10,7 @@ export const usePhotoFrameControl = (conf?: {
 
   const mediaMatcher = window.matchMedia(`(min-aspect-ratio: ${screenAspectThreshold})`)
   const route = useRoute()
+  const completeLoading = ref(false)
   const articleId = ref(Number(route.params.id as string))
   const articles = ref<Article[]>([])
   const currentIndex = ref<number>(-1)
@@ -50,6 +51,7 @@ export const usePhotoFrameControl = (conf?: {
     }) as {content: number}).content
 
     if (Number(storedVersion) === Number(currentVersion)) {
+      completeLoading.value = true
       return JSON.parse(storedContent ?? '[]')
     }
 
@@ -59,6 +61,7 @@ export const usePhotoFrameControl = (conf?: {
 
     localStorage.setItem('version', String(currentVersion))
     localStorage.setItem('content', JSON.stringify(result ?? []))
+    completeLoading.value = true
     return result
   }
 
@@ -267,6 +270,7 @@ export const usePhotoFrameControl = (conf?: {
   })
 
   return {
+    completeLoading,
     tasks,
     articles,
     currentIndex,

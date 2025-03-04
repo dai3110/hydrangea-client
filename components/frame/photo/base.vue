@@ -4,21 +4,33 @@ import RightPanel from '@/components/frame/photo/right.vue'
 import PortraitPanel from '@/components/frame/photo/portrait.vue'
 import ThumbnailPanel from '@/components/frame/photo/thumbnail.vue'
 
-const { tasks, articles, currentIndex, nextIndex, scrollerActivity, portrait, landscape } =
-  usePhotoFrameControl()
+const {
+  completeLoading,
+  tasks,
+  articles,
+  currentIndex,
+  nextIndex,
+  scrollerActivity,
+  portrait,
+  landscape
+} = usePhotoFrameControl()
 
-const indexMarkers = computed<{
+const indexMarkers = computed<
+  {
     lat: number | null | undefined
     lng: number | null | undefined
     article: number | null | undefined
-  }[]>(()=> {
-  return articles.value.map((article) => {
-    return {
-      lat: article.lat,
-      lng: article.lng,
-      article: article.id
-    }
-  }).filter(marker => marker.lat && marker.lng && marker.article)
+  }[]
+>(() => {
+  return articles.value
+    .map((article) => {
+      return {
+        lat: article.lat,
+        lng: article.lng,
+        article: article.id
+      }
+    })
+    .filter((marker) => marker.lat && marker.lng && marker.article)
 })
 
 onMounted(() => {
@@ -34,7 +46,7 @@ onMounted(() => {
       landscape
     }"
   >
-    <div class="book_area">
+    <div v-if="completeLoading" class="book_area">
       <div class="book_main">
         <div v-if="landscape" data-panel="left">
           <LeftPanel
@@ -84,13 +96,16 @@ onMounted(() => {
         </div>
       </div>
     </div>
-    <div class="book_control">
+    <div v-if="completeLoading" class="book_control">
       <ThumbnailPanel
         :current="currentIndex"
         :articles="articles"
         :activity="scrollerActivity"
         @turn="(index) => tasks.turnPage(index)"
       />
+    </div>
+    <div v-if="!completeLoading" class="loading">
+      {{ `waiting... lambda's "cold start"` }}
     </div>
   </div>
 </template>
@@ -156,5 +171,14 @@ $area_width: min(
     width: 100%;
     height: 100%;
   }
+}
+
+.loading {
+  align-self: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #999;
 }
 </style>
